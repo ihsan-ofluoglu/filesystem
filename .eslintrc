@@ -20,6 +20,11 @@
     "eslint-comments"
   ],
   "rules": {
+    "import/prefer-default-export": "off",
+    "class-methods-use-this": "off",
+    "jest/no-truthy-falsy": "off",
+    "jest/no-hooks": "off",
+    "@typescript-eslint/no-useless-constructor": "off",
     "prettier/prettier": "error",
     "eslint-comments/no-unused-disable": "error",
     "jest/prefer-expect-assertions": "off"
