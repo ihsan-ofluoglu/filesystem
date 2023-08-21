@@ -29,11 +29,11 @@ To safely interact with the filesystem, always wrap the adapter in a Filesystem 
 
 ```
 // SETUP
-$adapter = new LocalFilesystemAdapter($rootPath);
-$filesystem = new Filesystem($adapter);
+adapter = new LocalFilesystemAdapter(rootPath);
+filesystem = new Filesystem(adapter);
 
 // USAGE
-$filesystem.write($path, $contents);
+filesystem.write(path, contents);
 ```
 
 [Architecture](Architecture): Filesystem's internal architecture
