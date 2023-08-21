@@ -91,23 +91,23 @@ When writing files, the directory you’re writing to will be created automatica
 #### FilesystemWriter::write
 
 ```
-$filesystem->write($path, $contents, $config);
+filesystem.write(path, contents, config);
 ```
 
 #### FilesystemWriter::writeStream
 
 ```
-$filesystem->writeStream($path, $stream, $config);
+filesystem.writeStream(path, stream, config);
 ```
 
 #### FilesystemReader::read
 
 ```
-$response = $filesystem->read($path);
+response = filesystem.read(path);
 ```
 
 #### FilesystemReader::readStream
 
 ```
-$response = $filesystem->readStream($path);
+response = filesystem.readStream(path);
 ```
