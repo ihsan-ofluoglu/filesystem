@@ -42,6 +42,9 @@ export class LocalFilesystemAdapter implements FilesystemAdapter {
 
   delete(path: string): void {
     const fullPath = this.pathManager.getFullPath(path);
+
+    if (!this.fileExists(fullPath)) return;
+
     fs.unlinkSync(fullPath);
   }
 
