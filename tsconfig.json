@@ -15,9 +15,9 @@
         "noFallthroughCasesInSwitch": true,
         "forceConsistentCasingInFileNames": true,
         "esModuleInterop": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
     },
     "include": [
         "src/**/*"
-    ]
+    ],
 }
