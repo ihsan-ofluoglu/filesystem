@@ -1,8 +1,9 @@
-import * as fs from 'fs';
+import fs from 'fs/promises';
 
 import { FilesystemAdapter } from '../filesystem.adapter';
 import { Config } from '../config';
 import { PathManager } from '../path-manager';
+import { FileNotFoundException } from '../errors/filenotfound.exception';
 
 /**
  * @class LocalFilesystemAdapter
@@ -19,11 +20,11 @@ export class LocalFilesystemAdapter implements FilesystemAdapter {
     this.pathManager = new PathManager(root);
   }
 
-  fileExists(path: string): boolean {
+  async fileExists(path: string): Promise<boolean> {
     const fullPath = this.pathManager.getFullPath(path);
 
     try {
-      fs.accessSync(fullPath, fs.constants.F_OK);
+      await fs.access(fullPath, fs.constants.F_OK);
 
       return true;
     } catch (e) {
@@ -31,59 +32,55 @@ export class LocalFilesystemAdapter implements FilesystemAdapter {
     }
   }
 
-  copy(_source: string, _destination: string, _config?: Config): void {
-    throw new Error('Not Implemented');
-  }
-
-  createDirectory(path: string, _config?: Config): void {
+  async createDirectory(path: string, config?: Config): Promise<void> {
     const fullPath = this.pathManager.getFullPath(path);
-    return fs.mkdirSync(fullPath);
+    return fs.mkdir(fullPath, config);
   }
 
-  delete(path: string): void {
+  async delete(path: string): Promise<void> {
     const fullPath = this.pathManager.getFullPath(path);
 
-    if (!this.fileExists(fullPath)) return;
+    const exists = await this.fileExists(path);
+    if (!exists) throw new FileNotFoundException();
 
-    fs.unlinkSync(fullPath);
+    return fs.unlink(fullPath);
   }
 
-  deleteDirectory(_path: string): void {
-    throw new Error('Not Implemented');
-  }
-
-  directoryExists(_path: string): boolean {
-    throw new Error('Not Implemented');
-  }
-
-  fileSize(_path: string): number {
-    throw new Error('Not Implemented');
-  }
-
-  move(_source: string, _destination: string, _config?: Config): void {
-    throw new Error('Not Implemented');
-  }
-
-  read(_path: string): string {
-    throw new Error('Not Implemented');
-  }
-
-  readStream(_path: string): string {
-    throw new Error('Not Implemented');
-  }
-
-  write(path: string, content: string, _config?: Config): void {
+  async deleteDirectory(path: string, config?: Config): Promise<void> {
     const fullPath = this.pathManager.getFullPath(path);
 
-    return fs.writeFileSync(fullPath, content, { flag: 'wx' });
+    const exists = await this.fileExists(path);
+    if (!exists) throw new FileNotFoundException();
+
+    return fs.rm(fullPath, config);
   }
 
-  writeStream(path: string, content: string, _config?: Config): void {
+  async directoryExists(path: string): Promise<boolean> {
+    return this.fileExists(path);
+  }
+
+  async fileSize(path: string): Promise<number> {
     const fullPath = this.pathManager.getFullPath(path);
 
-    const stream = fs.createWriteStream(fullPath);
+    const exists = await this.fileExists(path);
+    if (!exists) throw new FileNotFoundException();
 
-    stream.write(content);
-    stream.end();
+    const stats = await fs.stat(fullPath);
+    return stats.size;
+  }
+
+  async read(path: string): Promise<string> {
+    const fullPath = this.pathManager.getFullPath(path);
+
+    const exists = await this.fileExists(path);
+    if (!exists) throw new FileNotFoundException();
+
+    return fs.readFile(fullPath, 'utf-8');
+  }
+
+  async write(path: string, content: string, config?: Config): Promise<void> {
+    const fullPath = this.pathManager.getFullPath(path);
+
+    return fs.writeFile(fullPath, content, config);
   }
 }

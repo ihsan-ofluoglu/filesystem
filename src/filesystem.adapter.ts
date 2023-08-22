@@ -11,13 +11,7 @@ export interface FilesystemAdapter {
    * @function
    * @param {string} path
    */
-  fileExists(path: string): boolean;
-
-  /**
-   * @function
-   * @param {string} path
-   */
-  directoryExists(path: string): boolean;
+  fileExists(path: string): Promise<boolean>;
 
   /**
    *
@@ -26,73 +20,45 @@ export interface FilesystemAdapter {
    * @param {string} content
    * @param {Config} config
    */
-  write(path: string, content: string, config?: Config): void;
-
-  /**
-   *
-   * @function
-   * @param {string} path
-   * @param {string} content
-   * @param {Config} config
-   */
-  writeStream(path: string, content: string, config?: Config): void;
+  write(path: string, content: string, config?: Config): Promise<void>;
 
   /**
    *
    * @function
    * @param {string} path
    */
-  read(path: string): string;
+  read(path: string): Promise<string>;
 
   /**
    *
    * @function
    * @param {string} path
    */
-  readStream(path: string): string;
+  delete(path: string): Promise<void>;
 
   /**
    *
    * @function
    * @param {string} path
    */
-  delete(path: string): void;
+  deleteDirectory(path: string, config?: Config): Promise<void>;
 
   /**
-   *
    * @function
    * @param {string} path
    */
-  deleteDirectory(path: string): void;
+  directoryExists(path: string): Promise<boolean>;
 
   /**
    * @function
    * @param {string} path
    * @param {Config} config
    */
-  createDirectory(path: string, config?: Config): void;
+  createDirectory(path: string, config?: Config): Promise<void>;
 
   /**
    * @function
    * @param {string} path
    */
-  fileSize(path: string): number;
-
-  /**
-   *
-   * @function
-   * @param {string} source
-   * @param {string} destination
-   * @param {Config} config
-   */
-  move(source: string, destination: string, config?: Config): void;
-
-  /**
-   *
-   * @function
-   * @param {string} source
-   * @param {string} destination
-   * @param {Config} config
-   */
-  copy(source: string, destination: string, config?: Config): void;
+  fileSize(path: string): Promise<number>;
 }

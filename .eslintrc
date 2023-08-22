@@ -25,6 +25,9 @@
     "jest/no-truthy-falsy": "off",
     "jest/no-hooks": "off",
     "@typescript-eslint/no-useless-constructor": "off",
+    "consistent-return": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "jest/expect-expect": "off",
     "prettier/prettier": "error",
     "eslint-comments/no-unused-disable": "error",
     "jest/prefer-expect-assertions": "off"
