@@ -1,5 +1,5 @@
 {
-  "name": "childsystem",
+  "name": "filesystem",
   "version": "0.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,6 @@
   ],
   "license": "MIT",
   "scripts": {
-    "doc": "jsdoc -c jsdoc.json",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -17,9 +16,13 @@
     "lint:tsc": "tsc",
     "lint:eslint": "eslint 'src/**/*.ts'",
     "lint": "yarn lint:tsc && yarn lint:eslint",
-    "format": "prettier --write 'src/**/*.ts' && yarn lint:eslint --fix"
+    "format": "prettier --write 'src/**/*.ts' && yarn lint:eslint --fix",
+    "release": "changeset publish",
+    "changeset": "changeset",
+    "version": "changeset version"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.2",
     "@types/jest": "^26.0.3",
     "@typescript-eslint/eslint-plugin": "^3.5.0",
     "@typescript-eslint/parser": "^3.5.0",
@@ -32,16 +35,15 @@
     "eslint-plugin-jest": "^23.17.1",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-prettier": "^3.1.4",
+    "memfs": "^4.2.1",
     "jest": "^26.1.0",
-    "jsdoc": "^4.0.2",
-    "jsdocs": "^1.0.0",
     "prettier": "^2.0.5",
     "taffydb": "^2.7.3",
     "ts-jest": "^26.1.1",
     "typescript": "^3.9.5"
   },
   "engines": {
-    "node": "^18.0.0"
+    "node": ">=14.0.0"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -59,8 +61,5 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  },
-  "dependencies": {
-    "memfs": "^4.2.1"
   }
 }
