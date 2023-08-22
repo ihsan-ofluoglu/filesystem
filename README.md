@@ -1,5 +1,8 @@
 # Filesystem
 
+[build-badge]: https://img.shields.io/github/actions/workflow/status/ihsan-ofluoglu/filesystem/test.yml?branch=main&style=square
+[build]: https://github.com/ihsan-ofluoglu/filesystem/actions/workflows/test.yml
+
 ### About Filesystem
 
 Flysystem is a file storage library for javascript. It provides one interface to interact with many types of filesystems. When you use Filesystem, you're not only protected from vendor lock-in, you'll also have a consistent experience for which ever storage is right for you.
