@@ -1,4 +1,4 @@
-# Filesystem
+# Filesystem &middot; [![build][build-badge]][build]
 
 [build-badge]: https://img.shields.io/github/actions/workflow/status/ihsan-ofluoglu/filesystem/test.yml?branch=main&style=square
 [build]: https://github.com/ihsan-ofluoglu/filesystem/actions/workflows/test.yml
